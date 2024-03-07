@@ -10,6 +10,16 @@ type ResponseData = {
     error?: string
 }
 
+/**
+ * @swagger
+ * /api/movies:
+ *      get:
+ *          description: Returns movies
+ *          responses:
+ *              200:
+ *                  description: Hello Movies
+ */
+
 // .../api/movies
 export default async function handler(
     req: NextApiRequest,

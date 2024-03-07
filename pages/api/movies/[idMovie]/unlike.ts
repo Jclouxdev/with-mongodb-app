@@ -2,6 +2,24 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import clientPromise from "../../../../lib/mongodb";
 
+// Swagger definition
+/**
+ * @swagger
+ * /api/movies/{idMovie}/unlike:
+ *   patch:
+ *     description: Decrement the likes of a movie by id
+ *     parameters:
+ *       - in: path
+ *         name: idMovie
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *     responses:
+ *       200:
+ *         description: Hello Movies
+ */
+
 // pages/api/movies/[idMovie]/likes.js
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     const idMovie = parseInt(<string>req.query.idMovie, 10);
@@ -34,10 +52,6 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
                 }
                 res.status(201).json({ status: 201, data: data });
             }
-            break;
-        case "GET":
-            const likes = await db.collection("likes").findOne({idTMDB: idMovie});
-            res.json({ status: 200, data: { likes: likes } });
             break;
         default:
             res.status(405).json({ status: 405, error: "Method Not Allowed" });

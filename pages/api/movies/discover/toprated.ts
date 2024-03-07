@@ -2,6 +2,20 @@ import {NextApiRequest, NextApiResponse} from "next";
 import {ConfigService} from "../../../../services/config.service";
 import fetch from "node-fetch";
 
+// Swagger definition
+/**
+ * @swagger
+ * /api/movies/discover/toprated:
+ *         get: {
+ *             description: 'Returns top rated movies',
+ *             responses: {
+ *                 200: {
+ *                     description: 'Hello Movies'
+ *                 }
+ *             }
+ *         }
+ */
+
 export default async function handler(req: NextApiRequest, res:NextApiResponse ) {
     const url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
     const options = {

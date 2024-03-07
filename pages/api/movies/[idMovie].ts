@@ -10,6 +10,30 @@ type ResponseData = {
     error?: string
 }
 
+/**
+ * @swagger
+ * /api/movies/{idMovie}:
+ *         get: {
+ *             description: 'Returns a movie by id',
+ *             parameters: [
+ *                 {
+ *                     in: 'path',
+ *                     name: 'idMovie',
+ *                     required: true,
+ *                     schema: {
+ *                         type: 'integer',
+ *                         minimum: 1
+ *                     }
+ *                 }
+ *             ],
+ *             responses: {
+ *                 200: {
+ *                     description: 'Hello Movies'
+ *                 }
+ *             }
+ *         }
+ */
+
 // .../api/movies/:id
 export default async function handler(req:NextApiRequest, res:NextApiResponse<ResponseData>) {
     const idMovie = parseInt(<string>req.query.idMovie, 10);

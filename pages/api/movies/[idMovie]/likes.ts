@@ -2,6 +2,50 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import clientPromise from "../../../../lib/mongodb";
 
+// Swagger definition
+/**
+ * @swagger
+ * /api/movies/{idMovie}/likes:
+ *         get: {
+ *             description: 'Returns the likes of a movie by id',
+ *             parameters: [
+ *                 {
+ *                     in: 'path',
+ *                     name: 'idMovie',
+ *                     required: true,
+ *                     schema: {
+ *                         type: 'integer',
+ *                         minimum: 1
+ *                     }
+ *                 }
+ *             ],
+ *             responses: {
+ *                 200: {
+ *                     description: 'Hello Movies'
+ *                 }
+ *             }
+ *         }
+ *         patch: {
+ *             description: 'Increment the likes of a movie by id',
+ *             parameters: [
+ *                 {
+ *                     in: 'path',
+ *                     name: 'idMovie',
+ *                     required: true,
+ *                     schema: {
+ *                         type: 'integer',
+ *                         minimum: 1
+ *                     }
+ *                 }
+ *             ],
+ *             responses: {
+ *                 201: {
+ *                     description: 'Hello Movies'
+ *                 }
+ *             }
+ *         }
+ */
+
 // pages/api/movies/[idMovie]/likes.js
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     const idMovie = parseInt(<string>req.query.idMovie, 10);
