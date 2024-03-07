@@ -80,3 +80,11 @@ To deploy your local project to Vercel, push it to GitHub/GitLab/Bitbucket and [
 Alternatively, you can deploy using our template by clicking on the Deploy button below.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?project-name=with-mongodb&repository-name=with-mongodb&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-mongodb&integration-ids=oac_jnzmjqM10gllKmSrG0SGrHOH)
+
+# Cours
+
+Setup
+- S'inscrire et se connecter sur la plateforme.
+- Créer le cluster partagé (gratuit, 512Mb stockage).
+- Autoriser les adresses IP pour la connexion depuis la couche applicative (onglet Network Access).
+- Créer juste une base de données et une collection "likes" qui restera pour le moment vide
