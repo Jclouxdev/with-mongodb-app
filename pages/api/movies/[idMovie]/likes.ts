@@ -83,6 +83,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
             const likes = await db.collection("likes").findOne({idTMDB: idMovie});
             res.json({ status: 200, data: { likes: likes } });
             break;
+
         default:
             res.status(405).json({ status: 405, error: "Method Not Allowed" });
     }

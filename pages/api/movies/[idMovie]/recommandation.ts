@@ -1,14 +1,19 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {ConfigService} from "../../../../services/config.service";
-import fetch from "node-fetch";
 
-// Swagger definition
+// Swagger definition for /api/movies/{movieId}/recommendations
 /**
  * @swagger
- * /api/movies/discover/toprated:
+ * /api/movies/{idMovie}/recommandation:
  *      get:
- *          description: Returns top rated movies
+ *          description: Returns recommended movies for a movie by id
  *          parameters:
+ *              - in: path
+ *                name: idMovie
+ *                required: true
+ *                schema:
+ *                  type: integer
+ *                  minimum: 1
  *              - in: query
  *                name: language
  *                required: false
@@ -26,10 +31,12 @@ import fetch from "node-fetch";
  *                  description: Hello Movies
  */
 
-export default async function handler(req: NextApiRequest, res:NextApiResponse ) {
+export default async function handler(req:NextApiRequest, res:NextApiResponse ) {
+    const idMovie = <string>req.query.idMovie;
     const language = req.query.language || 'en-US';
     const page = req.query.page || 1;
-    const url = ConfigService.themoviedb.urls.movies.top_rated + `?language=${language}&page=${page}`;
+    const replaceRegex = new RegExp(ConfigService.themoviedb.urls.regex.ninjaReplace)
+    const url = ConfigService.themoviedb.urls.movies.recommendations.replace(replaceRegex, idMovie) + `?language=${language}&page=${page}`;
     const options = {
         method: 'GET',
         headers: {
@@ -47,5 +54,5 @@ export default async function handler(req: NextApiRequest, res:NextApiResponse )
         return
     }
 
-    res.json({ status: 200, data: apiResponse });
+    res.json({ status: 200, data: apiResponse.results });
 }

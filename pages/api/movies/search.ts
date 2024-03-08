@@ -1,35 +1,27 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {ConfigService} from "../../../../services/config.service";
+import {ConfigService} from "../../../services/config.service";
 import fetch from "node-fetch";
 
 // Swagger definition
 /**
  * @swagger
- * /api/movies/discover/toprated:
+ * /api/movies/search:
  *      get:
- *          description: Returns top rated movies
+ *          description: Returns movies by search
  *          parameters:
  *              - in: query
- *                name: language
- *                required: false
+ *                name: search
+ *                required: true
  *                schema:
  *                  type: string
- *                  default: 'en-US'
- *              - in: query
- *                name: page
- *                required: false
- *                schema:
- *                  type: integer
- *                  default: 1
  *          responses:
  *              200:
  *                  description: Hello Movies
  */
 
-export default async function handler(req: NextApiRequest, res:NextApiResponse ) {
-    const language = req.query.language || 'en-US';
-    const page = req.query.page || 1;
-    const url = ConfigService.themoviedb.urls.movies.top_rated + `?language=${language}&page=${page}`;
+export default async function handler(req:NextApiRequest, res:NextApiResponse ) {
+    const search = req.query.search || '';
+    const url = ConfigService.themoviedb.urls.movies.search + `?query=${search}&API_KEY=${ConfigService.themoviedb.keys.API_KEY}`;
     const options = {
         method: 'GET',
         headers: {

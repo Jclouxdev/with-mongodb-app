@@ -52,5 +52,9 @@ export default async function handler(
 
             res.json({status: 200, data: apiResponse, method: "GET"})
             break;
+
+        default:
+            res.json({status: 405, error: "Method Not Allowed"})
+            break;
     }
 }
