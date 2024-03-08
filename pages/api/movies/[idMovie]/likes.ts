@@ -66,17 +66,17 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
                     matchedCount: resMongo.matchedCount,
                     modifiedCount: resMongo.modifiedCount
                 }
-                res.status(201).json({ status: 201, data: data });
+                res.status(201).json({ status: 201, data: data, updated: like });
             } else {
                 resMongo = await db.collection("likes").insertOne(
-                    {idTMDB: idMovie, likeCounter: 0}
+                    {idTMDB: idMovie, likeCounter: 1}
                 )
                 data = {
                     action: 'likeCounter created',
                     idMovie: idMovie,
                     insertedId: resMongo.insertedId
                 }
-                res.status(201).json({ status: 201, data: data });
+                res.status(201).json({ status: 201, data: data, updated: like});
             }
             break;
         case "GET":

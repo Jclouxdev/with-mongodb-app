@@ -10,11 +10,25 @@ type ResponseData = {
     error?: string
 }
 
+// Swagger definition
 /**
  * @swagger
  * /api/movies:
  *      get:
- *          description: Returns movies
+ *          description: Returns popular movies
+ *          parameters:
+ *              - in: query
+ *                name: language
+ *                required: false
+ *                schema:
+ *                  type: string
+ *                  default: 'en-US'
+ *              - in: query
+ *                name: page
+ *                required: false
+ *                schema:
+ *                  type: integer
+ *                  default: 1
  *          responses:
  *              200:
  *                  description: Hello Movies
@@ -26,7 +40,9 @@ export default async function handler(
     res: NextApiResponse<ResponseData>
 ) {
     // Fetch the movies from the TheMovieDB API
-    const url = ConfigService.themoviedb.urls.movies.popular;
+    const language = req.query.language || 'en-US';
+    const page = req.query.page || 1;
+    const url = ConfigService.themoviedb.urls.movies.popular + `?language=${language}&page=${page}`;
     const options = {
         method: 'GET',
         headers: {
